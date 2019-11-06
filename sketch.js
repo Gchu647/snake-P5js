@@ -1,29 +1,40 @@
-let value = '#ffffff';
+let currentX = 100;
+let currentY = 100;
+let previousX = 100;
+let previousY = 100;
+
 
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(1200, 1200);
 }
 
 function draw() {
-  fill(value);
-  rect(25, 25, 50, 50);
+  fill(0);
+  rect(currentX, currentY, 50, 50);
 }
 function keyTyped() {
+  let tempX = currentX;
+  let tempY = currentY;
+
+  clear();
+
   switch (key) {
     case 'w':
-      value = '#fcba03';
-      break;
-    case 'a':
-      value = '#0ee375';
+      currentY = previousY - 50;
       break;
     case 's':
-        value = '#0e87e3';
-        break;
+      currentY = previousY + 50;
+      break;
+    case 'a':
+      currentX = previousX - 50;
+      break;
     case 'd':
-        value = '#e34a0e';
-        break;
+      currentX = previousX + 50;
+      break;
     default:
-      value = '#ffffff';
       break;
   }
+
+  previousX = tempX;
+  previousY = tempY;
 }
