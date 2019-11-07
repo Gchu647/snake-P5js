@@ -1,40 +1,31 @@
-let currentX = 100;
-let currentY = 100;
-let previousX = 100;
-let previousY = 100;
+let x = 200;
+let y = 200;
 
 
 function setup() {
-  createCanvas(1200, 1200);
+  createCanvas(500, 500);
 }
 
 function draw() {
+  background(220);
   fill(0);
-  rect(currentX, currentY, 50, 50);
+  rect(x, y, 50, 50);
 }
 function keyTyped() {
-  let tempX = currentX;
-  let tempY = currentY;
-
-  clear();
-
   switch (key) {
     case 'w':
-      currentY = previousY - 50;
+      y = y - 20;
       break;
     case 's':
-      currentY = previousY + 50;
+      y = y + 20;
       break;
     case 'a':
-      currentX = previousX - 50;
+      x = x - 20;
       break;
     case 'd':
-      currentX = previousX + 50;
+      x = x + 20;
       break;
     default:
       break;
   }
-
-  previousX = tempX;
-  previousY = tempY;
 }
