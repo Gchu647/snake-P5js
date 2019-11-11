@@ -1,4 +1,4 @@
-let x = 0;
+let x = 150;
 let y = 200;
 
 
@@ -11,11 +11,27 @@ function draw() {
   background(220);
   fill(0);
   rect(x, y, 20, 20);
-  x = x + 1;
+
+  switch (key) { // moves square in a different direction
+    case 'w':
+      y = y - 3;
+      break;
+    case 's':
+      y = y + 3;
+      break;
+    case 'a':
+      x = x - 3;
+      break;
+    case 'd':
+      x = x + 3;
+      break;
+    default:
+      break;
+  }
 }
 
 function keyTyped() {
-  if (key === 'd') {
+  if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
     loop();
   } else {
     noLoop();
