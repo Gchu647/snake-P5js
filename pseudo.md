@@ -1,8 +1,7 @@
-- W = rect y - 50
-- S = rect y + 50
-- A = rect x - 50
-- D = rect x + 50
+##Next Steps
+- How to make the square move continously in one direction with WASD
 
 ##Steps
-- let currentX = 100, and currentY = 100, previousX = 100, previousY = 100.
-- When you press 'A', currentX = previousX - 10., previousX = currentX
+- Setup noLoop so draw only functions once. Then setup a reDraw loop inside keyTyped so it will contiously go in one direction.
+
+
