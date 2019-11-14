@@ -3,7 +3,7 @@ let y1 = 250;
 let x2 = Math.floor(Math.random() * 470);
 let y2 = Math.floor(Math.random() * 470);
 let squareRadius = 20;
-let eaten = 0;
+let addSquare = 0;
 
 
 function setup() {
@@ -56,36 +56,44 @@ function draw() {
   if (d <= squareRadius) {
     x2 = Math.floor(Math.random() * 500);
     y2 = Math.floor(Math.random() * 500);
-    eaten ++;
+    addSquare ++;
   }
 
   // traling square
-  secondSquare();
+  trailingSquare();
 
 }
 
-function secondSquare() {
-  if (eaten < 1)
+function trailingSquare() {
+  if (addSquare < 1)
     return;
 
+  let trailX = 0;
+  let trailY = 0;
 
   rectMode(CENTER);
   fill(100);
 
   switch (key) {
     case 'w':
-      rect(x1, y1 + squareRadius, 20, 20);
+      trailX = x1;
+      trailY = y1 + squareRadius;
       break;
     case 's':
-      rect(x1, y1 - squareRadius, 20, 20);
+      trailX = x1;
+      trailY = y1 - squareRadius;
       break;
     case 'a':
-      rect(x1 + squareRadius, y1, 20, 20);
+      trailX = x1 + squareRadius;
+      trailY = y1;
       break;
     case 'd':
-        rect(x1 - squareRadius, y1, 20, 20);
+      trailX = x1 - squareRadius;
+      trailY = y1;
       break;
     default:
       break;
-  }
+  } 
+
+  rect(trailX, trailY, 20, 20);
 }
