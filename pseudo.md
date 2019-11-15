@@ -1,12 +1,9 @@
 https://p5js.org/reference/#/p5/noLoop
 
 ##Steps
-- if distance is less or equal to the radius of two square, activate if condition.
-
-- W: 2nd square is y1 + squareRadius
-- S: 2nd square is y1 - squareRadius
-- A: 2nd square is x1 + squareRadius
-- D: 2nd square is x1 - squareRadius
+- Clean up code
+- Make a Square Object
+- Move it around.
 
 ##Next Steps
-- for loopit!
+- box.move() not working.
