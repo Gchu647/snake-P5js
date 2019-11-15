@@ -9,7 +9,7 @@ let addSquare = 0;
 function setup() {
   createCanvas(500, 500);
   noLoop();
-  // frameRate(180);
+  box = new Box(0);
 }
 
 function keyTyped() {
@@ -23,9 +23,7 @@ function keyTyped() {
 function draw() {
   background(220);
   // black square code
-  rectMode(CENTER);
-  fill(0);
-  rect(x1, y1, 20, 20);
+  box.display();
 
   switch (key) { // moves square in a different direction
     case 'w':
@@ -58,42 +56,20 @@ function draw() {
     y2 = Math.floor(Math.random() * 500);
     addSquare ++;
   }
-
-  // traling square
-  trailingSquare();
-
 }
 
-function trailingSquare() {
-  if (addSquare < 1)
-    return;
+class Box {
+  constructor (color) {
+    this.x = 250
+    this.y = 250
+    this.width = 20;
+    this.height = 20;
+    this.color = color || 255;
+  }
 
-  let trailX = 0;
-  let trailY = 0;
-
-  rectMode(CENTER);
-  fill(100);
-
-  switch (key) {
-    case 'w':
-      trailX = x1;
-      trailY = y1 + squareRadius;
-      break;
-    case 's':
-      trailX = x1;
-      trailY = y1 - squareRadius;
-      break;
-    case 'a':
-      trailX = x1 + squareRadius;
-      trailY = y1;
-      break;
-    case 'd':
-      trailX = x1 - squareRadius;
-      trailY = y1;
-      break;
-    default:
-      break;
-  } 
-
-  rect(trailX, trailY, 20, 20);
+  display () {
+    rectMode(CENTER);
+    fill(this.color);
+    rect(this.x, this.y, this.width, this.height);
+  }
 }
