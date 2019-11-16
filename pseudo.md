@@ -6,4 +6,4 @@ https://p5js.org/reference/#/p5/noLoop
 - Move it around.
 
 ##Next Steps
-- box.move() not working.
+- Second box move randomly.

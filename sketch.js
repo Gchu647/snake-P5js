@@ -32,13 +32,13 @@ function draw() {
   rect(x2, y2, 20, 20);
 
   // move red square if d is too close
-  // let d = dist(x1, y1, x2, y2);
+  let d = dist(box.x, box.y, x2, y2);
   
-  // if (d <= squareRadius) {
-  //   x2 = Math.floor(Math.random() * 500);
-  //   y2 = Math.floor(Math.random() * 500);
-  //   addSquare ++;
-  // }
+  if (d <= squareRadius) {
+    x2 = Math.floor(Math.random() * 500);
+    y2 = Math.floor(Math.random() * 500);
+    addSquare ++;
+  }
 }
 
 class Box {
@@ -48,6 +48,14 @@ class Box {
     this.width = 20;
     this.height = 20;
     this.color = color || 255;
+  }
+
+  x() {
+    return this.x;
+  }
+
+  y() {
+    return this.y;
   }
 
   move () {
