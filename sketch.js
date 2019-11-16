@@ -1,15 +1,11 @@
-// let x1 = 250;
-// let y1 = 250;
-let x2 = Math.floor(Math.random() * 470);
-let y2 = Math.floor(Math.random() * 470);
 let squareRadius = 20;
-let addSquare = 0;
-
+let addSquare = 0; // will use for later
 
 function setup() {
   createCanvas(500, 500);
   noLoop();
-  box = new Box(0);
+  box1 = new Box(0);
+  box2 = new Box('#f54242');
 }
 
 function keyTyped() {
@@ -23,43 +19,33 @@ function keyTyped() {
 function draw() {
   background(220);
   // black square code
-  box.display();
-  box.move();
+  box1.display();
+  box1.move();
   
   // red square code
-  rectMode(CENTER);
-  fill('#f54242');
-  rect(x2, y2, 20, 20);
-
-  // move red square if d is too close
-  let d = dist(box.x, box.y, x2, y2);
-  
-  if (d <= squareRadius) {
-    x2 = Math.floor(Math.random() * 500);
-    y2 = Math.floor(Math.random() * 500);
-    addSquare ++;
-  }
+  box2.display();
+  box2.teleport(box1.x, box1.y);
 }
 
 class Box {
   constructor (color) {
-    this.x = 250
-    this.y = 250
+    this.x = Math.floor(Math.random() * 400);
+    this.y = Math.floor(Math.random() * 400);
     this.width = 20;
     this.height = 20;
-    this.color = color || 255;
+    console.log(color);
+    this.color = color;
   }
 
-  x() {
+  x () {
     return this.x;
   }
 
-  y() {
+  y () {
     return this.y;
   }
 
   move () {
-    console.log(key);
     switch (key) { // moves square in a different direction
       case 'w':
         this.y = this.y - 3;
@@ -75,6 +61,15 @@ class Box {
         break;
       default:
         break;
+    }
+  }
+
+  teleport(x2, y2) {
+    let d = dist(this.x, this.y, x2, y2);
+  
+    if (d <= squareRadius) {
+      this.x = Math.floor(Math.random() * 500);
+      this.y = Math.floor(Math.random() * 500);
     }
   }
 
