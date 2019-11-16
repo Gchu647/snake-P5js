@@ -1,11 +1,17 @@
 let squareRadius = 20;
 let addSquare = 0; // will use for later
+let boxes = [];
+let boxIndex = 2;
 
 function setup() {
   createCanvas(500, 500);
   noLoop();
+  // make black square and red square
   box1 = new Box(0);
   box2 = new Box('#f54242');
+  //put boxes in an array;
+  boxes[0] = box1;
+  boxes[1] = box2;
 }
 
 function keyTyped() {
@@ -25,6 +31,13 @@ function draw() {
   // red square code
   box2.display();
   box2.teleport(box1.x, box1.y);
+
+  // if more than 2 boxes
+  // TEST: display stores boxes from 2 and beyond
+  console.log('boxes: ', boxes.length);
+  for (let i = 2; i < boxes.length; i++) {
+    boxes[i].display();
+  }
 }
 
 class Box {
@@ -67,9 +80,13 @@ class Box {
   teleport(x2, y2) {
     let d = dist(this.x, this.y, x2, y2);
   
-    if (d <= squareRadius) {
+    if (d <= squareRadius) { // when box1 touch box2
       this.x = Math.floor(Math.random() * 500);
       this.y = Math.floor(Math.random() * 500);
+
+      // TEST: Store new Box()
+      boxes[boxIndex] = new Box(100);
+      boxIndex ++
     }
   }
 
