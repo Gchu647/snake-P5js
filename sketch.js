@@ -10,9 +10,9 @@ function setup() {
   boxes[1] = new Box(230, 240); // 1st white box
 
   //trailing boxes
-  boxes[2] = new Box(240, 240);
-  boxes[3] = new Box(250, 240);
-  boxes[4] = new Box(250, 250);
+  // boxes[2] = new Box(240, 240);
+  // boxes[3] = new Box(250, 240);
+  // boxes[4] = new Box(250, 250);
 
   noLoop();
 }
@@ -25,9 +25,18 @@ function draw() {
   
   // red box code
   boxes[0].display();
-  boxes[0].teleport(boxes[1].x, boxes[1].y);
 
-  // Display trailing boxes
+  let d = dist(boxes[1].x, boxes[1].y, boxes[0].x, boxes[0].y);
+  
+  if (d <= squareRadius) { // when boxes[1] touch boxes[0]
+    boxes[0].teleport();
+
+    // add new Box() with box[i-1]'s prevX and preVY
+    boxes[boxIndex] = new Box(boxes[boxIndex-1].prevX, boxes[boxIndex-1].prevY);
+    boxIndex ++;
+  }
+
+  // display trailing boxes
   for (let i = 2; i < boxes.length; i++) {
     boxes[i].display();
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
@@ -44,8 +53,8 @@ function keyTyped() {
 
 class Box {
   constructor (x, y, color) {
-    this.x = x || Math.floor(Math.random() * 400);
-    this.y = y || Math.floor(Math.random() * 400);
+    this.x = x || Math.floor(Math.random() * 480);
+    this.y = y || Math.floor(Math.random() * 480);
     this.width = 10;
     this.height = 10;
     this.color = color || 255;
@@ -81,7 +90,7 @@ class Box {
     }
   }
 
-  follow(x2, y2) {
+  follow(x2, y2) { // for trailing boxes
     this.track();
 
     // move
@@ -89,17 +98,9 @@ class Box {
     this.y = y2;
   }
 
-  teleport(x2, y2) {
-    let d = dist(this.x, this.y, x2, y2);
-  
-    if (d <= squareRadius) { // when boxes[1] touch boxes[0]
-      this.x = Math.floor(Math.random() * 500);
-      this.y = Math.floor(Math.random() * 500);
-
-      // TEST!!!!!
-      // boxes[boxIndex] = new Box(100);
-      // boxIndex ++
-    }
+  teleport() {  
+    this.x = Math.floor(Math.random() * 480);
+    this.y = Math.floor(Math.random() * 480);
   }
 
   display () {

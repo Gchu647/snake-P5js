@@ -1,5 +1,6 @@
 https://p5js.org/reference/#/p5/noLoop
 
 ##Next Steps
-- Add a new Box() and increase boxes[] everytime there the red box is touched.
-- Watch Coding Train to understand Class.
++ End game when it touches the walls.
+- Change the Math.random function
+- End game when it touches itself.
