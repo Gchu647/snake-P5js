@@ -1,18 +1,14 @@
-let squareRadius = 10;
 let boxes = [];
 let boxIndex = 2;
+let squareRadius = 10;
 
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(505, 505);
+  console.log('width:', width);
   frameRate(25);
   // intial boxes
   boxes[0] = new Box(null, null, '#f54242'); // red box
-  boxes[1] = new Box(230, 240); // 1st white box
-
-  //trailing boxes
-  // boxes[2] = new Box(240, 240);
-  // boxes[3] = new Box(250, 240);
-  // boxes[4] = new Box(250, 250);
+  boxes[1] = new Box(); // 1st white box
 
   noLoop();
 }
@@ -41,6 +37,8 @@ function draw() {
     boxes[i].display();
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
   }
+
+  checkGameOver();
 }
 
 function keyTyped() {
@@ -51,10 +49,21 @@ function keyTyped() {
   }
 }
 
+function checkGameOver() {
+  console.log('x: ', boxes[1].x, 'y: ', boxes[1].y);
+  if ( (boxes[1].x) > 505 || (boxes[1].x) <= 0 || (boxes[1].y) > 505 || (boxes[1].y) <= 0) {
+    noLoop();
+  }
+}
+
+function range() {
+  return Math.floor(Math.random() * 495) + 5;
+}
+
 class Box {
   constructor (x, y, color) {
-    this.x = x || Math.floor(Math.random() * 480);
-    this.y = y || Math.floor(Math.random() * 480);
+    this.x = x || range();
+    this.y = y || range();
     this.width = 10;
     this.height = 10;
     this.color = color || 255;
@@ -99,8 +108,8 @@ class Box {
   }
 
   teleport() {  
-    this.x = Math.floor(Math.random() * 480);
-    this.y = Math.floor(Math.random() * 480);
+    this.x = range();
+    this.y = range();
   }
 
   display () {
