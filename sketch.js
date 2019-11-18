@@ -27,12 +27,16 @@ function draw() {
   if (d <= squareRadius) { // when boxes[1] touch boxes[0]
     boxes[0].teleport();
 
-    // add new Box() with box[i-1]'s prevX and preVY
-    boxes[boxIndex] = new Box(boxes[boxIndex-1].prevX, boxes[boxIndex-1].prevY);
-    boxIndex ++;
+    // add three new Box();
+    for (let i = 0; i < 3; i++) {
+      let x = boxes[boxIndex-1].prevX;
+      let y = boxes[boxIndex-1].prevY;
+      boxes[boxIndex] = new Box(x, y);
+      boxIndex ++;
+    }
   }
 
-  // display trailing boxes
+  // display all trailing boxes
   for (let i = 2; i < boxes.length; i++) {
     boxes[i].display();
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
@@ -50,7 +54,7 @@ function keyTyped() {
 }
 
 function checkGameOver() {
-  console.log('x: ', boxes[1].x, 'y: ', boxes[1].y);
+  // console.log('x: ', boxes[1].x, 'y: ', boxes[1].y);
   if ( (boxes[1].x) > 505 || (boxes[1].x) <= 0 || (boxes[1].y) > 505 || (boxes[1].y) <= 0) {
     noLoop();
   }
