@@ -36,13 +36,22 @@ function draw() {
       boxIndex ++;
     }
   }
-
+  
   // display all trailing boxes
   for (let i = 2; i < boxes.length; i++) {
     boxes[i].display();
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
   }
+  
+  // TEST BUG!!!!
+  if (boxes.length >= 3) {
+    boxes[1].color = 200;
+    boxes[2].color = 100;
+    console.log('color');
 
+    let d2 = dist(boxes[1].x, boxes[1].y, boxes[2].x, boxes[2].y);
+    console.log('d2: ', d2);
+  }
   checkGameOver();
 }
 
@@ -58,10 +67,21 @@ function keyTyped() {
 }
 
 function checkGameOver() {
-  // when box touches the border
+  // when box touches the wall
   if ( (boxes[1].x) > 505 || (boxes[1].x) <= 0 || (boxes[1].y) > 505 || (boxes[1].y) <= 0) {
     gameOver = true;
     noLoop();
+  }
+
+  // when box touch itself
+  for (let i = 1; i < boxes.length; i++) {
+    for (let j = i+1; j < boxes.length; j++) {
+      let d = dist(boxes[i].x, boxes[i].y, boxes[j].x, boxes[j].y);
+
+      if(d < squareRadius) {
+        noLoop();
+      }
+    }
   }
 }
 
