@@ -1,6 +1,7 @@
 let boxes = [];
 let boxIndex = 2;
 let squareRadius = 10;
+let gameOver = false;
 
 function setup() {
   createCanvas(505, 505);
@@ -46,6 +47,9 @@ function draw() {
 }
 
 function keyTyped() {
+  if (gameOver === true)
+    return;
+
   if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
     loop();
   } else {
@@ -54,8 +58,9 @@ function keyTyped() {
 }
 
 function checkGameOver() {
-  // console.log('x: ', boxes[1].x, 'y: ', boxes[1].y);
+  // when box touches the border
   if ( (boxes[1].x) > 505 || (boxes[1].x) <= 0 || (boxes[1].y) > 505 || (boxes[1].y) <= 0) {
+    gameOver = true;
     noLoop();
   }
 }
