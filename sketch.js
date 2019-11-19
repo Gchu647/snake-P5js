@@ -1,5 +1,6 @@
 let boxes = [];
 let boxIndex = 2;
+let addBox = 0;
 let squareRadius = 10;
 let gameOver = false;
 
@@ -25,16 +26,17 @@ function draw() {
 
   let d = dist(boxes[1].x, boxes[1].y, boxes[0].x, boxes[0].y);
   
-  if (d <= squareRadius) { // when boxes[1] touch boxes[0]
+  if (d <= squareRadius) { // when 1st white box touch red box
     boxes[0].teleport();
+    addBox = 5; // setup to add three new Box();
+  }
 
-    // add three new Box();
-    for (let i = 0; i < 3; i++) {
+  if (addBox > 0) { // add one new Box() every draw() loop
       let x = boxes[boxIndex-1].prevX;
       let y = boxes[boxIndex-1].prevY;
       boxes[boxIndex] = new Box(x, y);
       boxIndex ++;
-    }
+      addBox --;
   }
   
   // display all trailing boxes
@@ -42,16 +44,7 @@ function draw() {
     boxes[i].display();
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
   }
-  
-  // TEST BUG!!!!
-  if (boxes.length >= 3) {
-    boxes[1].color = 200;
-    boxes[2].color = 100;
-    console.log('color');
 
-    let d2 = dist(boxes[1].x, boxes[1].y, boxes[2].x, boxes[2].y);
-    console.log('d2: ', d2);
-  }
   checkGameOver();
 }
 
@@ -79,7 +72,9 @@ function checkGameOver() {
       let d = dist(boxes[i].x, boxes[i].y, boxes[j].x, boxes[j].y);
 
       if(d < squareRadius) {
+        console.log(boxes); // show me the error point
         noLoop();
+        gameOver = true;
       }
     }
   }
