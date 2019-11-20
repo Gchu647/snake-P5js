@@ -2,6 +2,7 @@ let boxes = [];
 let boxIndex = 2;
 let addBox = 0;
 let squareRadius = 10;
+let prevKey = '';
 let gameOver = false;
 
 function setup() {
@@ -105,21 +106,14 @@ class Box {
   move () { //movement of 1st box
     this.track();
 
-    switch (key) { // moves square in a different direction
-      case 'w':
-        this.y = this.y - 10;
-        break;
-      case 's':
-        this.y = this.y + 10;
-        break;
-      case 'a':
-        this.x = this.x - 10;
-        break;
-      case 'd':
-        this.x = this.x + 10;
-        break;
-      default:
-        break;
+    if (key === 'w') {
+      this.y = this.y - 10; 
+    } else if(key === 's') {
+      this.y = this.y + 10;
+    } else if (key === 'a') {
+      this.x = this.x - 10;
+    } else if (key === 'd') {
+      this.x = this.x + 10;
     }
   }
 
