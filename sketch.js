@@ -6,7 +6,7 @@ let direction = '';  // to prevent backward movement
 let gameOver = false;
 
 function setup() {
-  createCanvas(505, 505);
+  createCanvas(525, 525);
   console.log('width:', width);
   frameRate(25);
   // intial boxes
@@ -46,6 +46,8 @@ function draw() {
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
   }
 
+  let test = (floor(random((width - 25)/10 )) * 10) + 15;
+  console.log(test);
   checkGameOver();
 }
 
@@ -72,7 +74,7 @@ function keyTyped() {
 
 function checkGameOver() {
   // when box touches the wall
-  if ( (boxes[1].x) > 505 || (boxes[1].x) <= 0 || (boxes[1].y) > 505 || (boxes[1].y) <= 0) {
+  if ( (boxes[1].x) > width || (boxes[1].x) <= 0 || (boxes[1].y) > width || (boxes[1].y) <= 0) {
     gameOver = true;
     noLoop();
   }
@@ -91,7 +93,8 @@ function checkGameOver() {
 }
 
 function range() {
-  return Math.floor(Math.random() * 495) + 5;
+  // this equation retuns a number from 10 to width 520 in multiples of 10
+  return (floor(random((width - 15)/10 )) * 10) + 10;
 }
 
 class Box {
