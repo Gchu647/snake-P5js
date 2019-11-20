@@ -2,7 +2,7 @@ let boxes = [];
 let boxIndex = 2;
 let addBox = 0;
 let squareRadius = 10;
-let prevKey = '';
+let direction = '';  // to prevent backward movement
 let gameOver = false;
 
 function setup() {
@@ -58,6 +58,16 @@ function keyTyped() {
   } else {
     noLoop();
   }
+
+  if (key === 'w' && direction !== 'down') {
+    direction = 'up';
+  } else if(key === 's' && direction !== 'up') {
+    direction = 'down';
+  } else if (key === 'a' && direction !== 'right') {
+    direction = 'left';
+  } else if (key === 'd' && direction !== 'left') {
+    direction = 'right';
+  }
 }
 
 function checkGameOver() {
@@ -73,7 +83,6 @@ function checkGameOver() {
       let d = dist(boxes[i].x, boxes[i].y, boxes[j].x, boxes[j].y);
 
       if(d < squareRadius) {
-        console.log(boxes); // show me the error point
         noLoop();
         gameOver = true;
       }
@@ -106,13 +115,13 @@ class Box {
   move () { //movement of 1st box
     this.track();
 
-    if (key === 'w') {
+    if (direction === 'up') {
       this.y = this.y - 10; 
-    } else if(key === 's') {
+    } else if(direction === 'down') {
       this.y = this.y + 10;
-    } else if (key === 'a') {
+    } else if (direction === 'left') {
       this.x = this.x - 10;
-    } else if (key === 'd') {
+    } else if (direction === 'right') {
       this.x = this.x + 10;
     }
   }
