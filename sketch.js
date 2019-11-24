@@ -4,8 +4,16 @@ let addBox = 0;
 let squareRadius = 10;
 let direction = '';  // to prevent backward movement
 let gameOver = false;
+let scoreElem;
 
 function setup() {
+  scoreElem = createDiv('Score = 0');
+  scoreElem.position(20, 20);
+  scoreElem.class = 'score';
+  scoreElem.style('color', 'white');
+
+  console.log('class: ',scoreElem.class);
+
   createCanvas(525, 525);
   console.log('width:', width);
   frameRate(25);
