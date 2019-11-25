@@ -1,25 +1,26 @@
 let boxes = [];
-let boxIndex = 2;
-let addBox = 0;
-let squareRadius = 10;
+let boxIndex = 2; // index location of boxes to add the next box
+let addBox = 0; // # of boxes to add
+let squareRadius = 10; // distance between squares
 let direction = '';  // to prevent backward movement
 let gameOver = false;
 let scoreElem;
+let prevScore;
 
 function setup() {
+  createCanvas(525, 525);
+  frameRate(25);
+  
+  // intial boxes
+  boxes[0] = new Box(null, null, '#f54242'); // red box
+  boxes[1] = new Box(); // 1st white box
+
+  // Display text to track score
   scoreElem = createDiv('Score = 0');
   scoreElem.position(20, 20);
   scoreElem.class = 'score';
   scoreElem.style('color', 'white');
-
-  console.log('class: ',scoreElem.class);
-
-  createCanvas(525, 525);
-  console.log('width:', width);
-  frameRate(25);
-  // intial boxes
-  boxes[0] = new Box(null, null, '#f54242'); // red box
-  boxes[1] = new Box(); // 1st white box
+  scoreElem.style('font-size', '20px');
 
   noLoop();
 }
@@ -38,6 +39,10 @@ function draw() {
   if (d <= squareRadius) { // when 1st white box touch red box
     boxes[0].teleport();
     addBox = 5; // setup to add three new Box();
+    
+    // track and display your score
+    let prevScore = parseInt(scoreElem.html().substring(8));
+    scoreElem.html('Score = ' + (prevScore + 1));
   }
 
   if (addBox > 0) { // add one new Box() every draw() loop
@@ -54,8 +59,6 @@ function draw() {
     boxes[i].follow(boxes[i-1].prevX, boxes[i-1].prevY);
   }
 
-  let test = (floor(random((width - 25)/10 )) * 10) + 15;
-  console.log(test);
   checkGameOver();
 }
 
