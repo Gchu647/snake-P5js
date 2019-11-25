@@ -68,9 +68,8 @@ function keyTyped() {
 
   if (key === 'w' || key === 'a' || key === 's' || key === 'd') {
     loop();
-  } else {
-    noLoop();
   }
+  // add else noLoop() method for screenshots
 
   if (key === 'w' && direction !== 'down') {
     direction = 'up';
