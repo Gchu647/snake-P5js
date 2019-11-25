@@ -12,21 +12,21 @@ function setup() {
   frameRate(25);
   
   // intial boxes
-  boxes[0] = new Box(null, null, '#f54242'); // red box
+  boxes[0] = new Box(null, null, '#FFF400'); // red box
   boxes[1] = new Box(); // 1st white box
 
   // Display text to track score
   scoreElem = createDiv('Score = 0');
   scoreElem.position(20, 20);
   scoreElem.class = 'score';
-  scoreElem.style('color', 'white');
+  scoreElem.style('color', '#19514F');
   scoreElem.style('font-size', '20px');
 
   noLoop();
 }
 
 function draw() {
-  background(220);
+  background('#01FFFF');
   //1st white box code
   boxes[1].display();
   boxes[1].move();
@@ -156,6 +156,7 @@ class Box {
   display () {
     rectMode(CENTER);
     fill(this.color);
+    stroke('#269996');
     rect(this.x, this.y, this.width, this.height);
   }
 }
