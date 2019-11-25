@@ -8,4 +8,4 @@ You lose the game when you touch the wall or touch your own body. <br/>
 Refresh the game to restart the game. <br/>
 Try to get a score of 30 points! <br/><br/>
 
-![Olive App UI](./assets/snake-p5-screenshot.png)
+![Snake Game Screenshot](./assets/snake-p5-screenshot.png)
